@@ -1,3 +1,5 @@
+//chat room name has to be unique cant be taken by another chat room will have to vaildate for that
+
 exports.up = function (knex) {
     return knex.schema
         .createTable('users', (table) => {
@@ -23,7 +25,14 @@ exports.up = function (knex) {
         }).createTable('chat_rooms', (table) => {
             table.increments('id').primary();
             table.string('name').notNullable();
-            table.string('chat_room_photo')
+            table.string('chat_room_photo');
+            table.integer('user_id')
+                .unsigned()
+                .references('id')
+                .inTable('users')
+                .notNullable()
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
         }).createTable('messages', (table) => {
             table.increments('id').primary();
             table.integer('user_id')
@@ -45,5 +54,6 @@ exports.up = function (knex) {
 }
 
 exports.down = function (knex) {
-    // return knex.schema.dropTable('posts').dropTable('users');
+    return knex.schema.dropTable('messages').dropTable('chat_rooms').dropTable('posts').dropTable('users');
 };
+

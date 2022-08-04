@@ -7,18 +7,18 @@ router.get("/:id", (req, res) => {
     knex('users')
         .leftJoin("posts", "users.id", "posts.user_id")
         .select("users.id", "users.username", "users.profile_photo", "users.distance_preference", "users.sports_preference", "users.sport", "posts.sport", "posts.notes", "posts.id")
-        .where({"users.id": req.params.id})
+        .where({ "users.id": req.params.id })
         .then((data) => {
-             let posts = [];
-             data.forEach(el => {
-                if(el.sport !== null) {
+            let posts = [];
+            data.forEach(el => {
+                if (el.sport !== null) {
                     posts.push({
                         'id': el.id,
-                        'sport' : el.sport,
+                        'sport': el.sport,
                         'notes': el.notes,
                     })
                 }
-             })
+            })
 
             res.json({
                 id: data[0].id,
@@ -36,22 +36,15 @@ router.get("/:id", (req, res) => {
 
 //post route to create a user
 router.post("/", (req, res) => {
+    console.log(req.body);
     knex("users")
         .insert(req.body)
-        .catch((err) => {
-            res.status(500).send("Error adding user(s)");
-        })
-})
-
-//get route to get a user and all their posts - should just be the get user route
-router.get("/", (req, res) => {
-    knex("users").join("posts", "users.id", "posts.user_id")
-        .select("users.username", "users.console", "users.fav_game", "posts.game-title")
-        .then((data) => {
-            res.json(data);
+        .then((res) => {
+            console.log(res);
         }).catch((err) => {
             res.status(500).send("Error getting users");
         })
+    res.send("created user");
 })
 
 module.exports = router;

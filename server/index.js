@@ -5,6 +5,8 @@ const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 const usersRoutes = require("./routes/usersRoutes");
 const postsRoutes = require("./routes/postsRoutes");
+const chatRoomRoutes = require("./routes/chatRoomRoutes");
+
 
 
 app.use(cors());
@@ -12,6 +14,8 @@ app.use(express.json());
 
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
+app.use("/chatrooms", chatRoomRoutes);
+
 
 
 
