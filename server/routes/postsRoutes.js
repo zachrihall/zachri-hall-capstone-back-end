@@ -14,16 +14,27 @@ router.get("/", (req, res) => {
         })
 });
 
-//get post(s) by id
+//get post(s) by user id
 router.get("/:id", (req, res) => {
     knex
         .select("*")
         .from("posts")
-        .where("id", req.params.id)
+        .where("user_id", req.params.id)
         .then((data) => {
             res.json(data);
         }).catch((err) => {
             res.status(500).send("Error getting post(s)");
+        })
+})
+
+router.post("/", (req, res) => {
+    knex('posts')
+        .insert(req.body)
+        .then((data) => {
+            console.log(data);
+            // res.json({ success: "true" });
+        }).catch((err) => {
+            res.status(500).send("Error creating post");
         })
 })
 

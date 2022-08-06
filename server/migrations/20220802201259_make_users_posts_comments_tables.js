@@ -15,6 +15,9 @@ exports.up = function (knex) {
             table.increments('id').primary();
             table.string('notes').notNullable();
             table.string('sport').notNullable();
+            table.timestamp('created_at').defaultTo(knex.fn.now());
+            table.string('geo_latitude').notNullable();
+            table.string('geo_longitude').notNullable();
             table.integer('user_id')
                 .unsigned()
                 .references('id')
@@ -24,8 +27,8 @@ exports.up = function (knex) {
                 .onDelete('CASCADE');
         }).createTable('chat_rooms', (table) => {
             table.increments('id').primary();
-            table.string('name').notNullable();
-            table.string('chat_room_photo');
+            table.integer('chat_id').notNullable();
+            table.string('chat_name').notNullable();
             table.integer('user_id')
                 .unsigned()
                 .references('id')
@@ -35,6 +38,7 @@ exports.up = function (knex) {
                 .onDelete('CASCADE');
         }).createTable('messages', (table) => {
             table.increments('id').primary();
+            table.timestamp('created_at').defaultTo(knex.fn.now());
             table.integer('user_id')
                 .unsigned()
                 .references('id')
@@ -42,7 +46,7 @@ exports.up = function (knex) {
                 .notNullable()
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
-            table.integer('chat_room_id')
+            table.integer('chat_id')
                 .unsigned()
                 .references('id')
                 .inTable('chat_rooms')

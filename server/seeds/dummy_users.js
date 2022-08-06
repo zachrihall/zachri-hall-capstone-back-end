@@ -17,15 +17,16 @@ const posts_seed_data = [
     id: 1,
     notes: 'looking for a team to play flag football with',
     sport: 'football',
-    user_id: 1
+    user_id: 1,
+    geo_latitude: 0000000,
+    geo_longitude: 0000000
   }
 ];
 
 const chat_room_seed_data = [
   {
-    id: 1,
-    name: 'bballlovers',
-    chat_room_photo: 'chat room photo',
+    chat_name: 'bballlovers',
+    chat_id: 1,
     user_id: 1
   }
 ];
