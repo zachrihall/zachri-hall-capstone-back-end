@@ -11,7 +11,7 @@ exports.up = function (knex) {
             table.integer('distance_preference');
             table.string('sports_preference').defaultTo("all");
         })
-        .createTable('posts', (table) => {
+        .createTable('teams', (table) => {
             table.increments('id').primary();
             table.string('notes').notNullable();
             table.string('sport').notNullable();
@@ -19,6 +19,7 @@ exports.up = function (knex) {
             table.string('geo_latitude').notNullable();
             table.string('geo_longitude').notNullable();
             table.string('chat_id').notNullable();
+            table.string('team_name').notNullable().defaultTo('Local Team');
             table.integer('user_id')
                 .unsigned()
                 .references('id')
@@ -38,6 +39,7 @@ exports.up = function (knex) {
                 .notNullable()
                 .onUpdate('CASCADE')
                 .onDelete('CASCADE');
+            table.string('team_name').notNullable().defaultTo("LOCAL TEAM");
         }).createTable('messages', (table) => {
             table.increments('id').primary();
             table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -51,10 +53,21 @@ exports.up = function (knex) {
             table.string('chat_id').notNullable();
             table.string('message');
             table.string('username').notNullable();
+        }).createTable('imgs', (table) => {
+            table.increments('id').primary();
+            table.text('name');
+            table.text('img');
+            table.integer('user_id')
+                .unsigned()
+                .references('id')
+                .inTable('users')
+                .notNullable()
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
         })
 }
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('messages').dropTable('chat_rooms').dropTable('posts').dropTable('users');
+    return knex.schema.dropTable('messages').dropTable('chat_rooms').dropTable('teams').dropTable('users');
 };
 

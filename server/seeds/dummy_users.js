@@ -37,8 +37,8 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('users').del()
   await knex('users').insert(users_seed_data);
-  await knex('posts').del()
-  await knex('posts').insert(posts_seed_data);
+  await knex('teams').del()
+  await knex('teams').insert(posts_seed_data);
   await knex('chat_rooms').del()
   await knex('chat_rooms').insert(chat_room_seed_data);
 };

@@ -4,14 +4,17 @@ const router = express();
 
 
 
-//get post(s) by user id
+// get team(s) by user id
 router.get("/:id", (req, res) => {
-    knex
+    console.log("req: ", req);
+
+    knex('chat_name')
         .select("*")
-        .from("posts")
+        .from("teams")
         .where("user_id", req.params.id)
         .then((data) => {
             res.json(data);
+            console.log("res: ", data[0]);
         }).catch((err) => {
             res.status(500).send("Error getting post(s)");
         })
@@ -21,7 +24,7 @@ router.get("/:id", (req, res) => {
 router.get("/chat/:id", (req, res) => {
     knex
         .select("*")
-        .from("posts")
+        .from("teams")
         .where("chat_id", req.params.id)
         .then((data) => {
             res.json(data);
@@ -32,7 +35,7 @@ router.get("/chat/:id", (req, res) => {
 
 router.post("/", (req, res) => {
     console.log(req.body)
-    knex('posts')
+    knex('teams')
         .insert(req.body)
         .then((data) => {
             console.log(data);
@@ -42,15 +45,15 @@ router.post("/", (req, res) => {
         })
 })
 
-//get all posts
+//get all teams
 router.get("/", (req, res) => {
     knex
         .select("*")
-        .from("posts")
+        .from("teams")
         .then((data) => {
             res.json(data);
         }).catch((err) => {
-            res.status(500).send("Error getting posts");
+            res.status(500).send("Error getting teams");
         })
 });
 

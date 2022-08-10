@@ -2,6 +2,7 @@ const knex = require("knex")(require("../knexfile.js"));
 const express = require('express');
 const router = express();
 const jwt = require("jsonwebtoken");
+// const bcrypt = require('bcrypt');
 
 const jsonSecretKey = "f91e4494-04b3-4d49-8c27-57faed9e5785";
 
@@ -9,10 +10,14 @@ function getToken(req) {
     return req.headers.authorization.split(" ")[1];
 }
 
+
 //post route to create a user
 router.post("/signup", (req, res) => {
+    const {username, password} = req.body;
+    // const hashPass = bcrypt.hashSync(password, saltRounds);
+
     knex("users")
-        .insert(req.body)
+        .insert({username: username, password: password})
         .then((res) => {
             console.log(res);
         }).catch((err) => {
@@ -25,6 +30,7 @@ router.post("/login", (req, res) => {
     console.log(req);
     const { username, password } = req.body;
     // const user = users[username];
+    
 
     knex("users")
         .select("*")
