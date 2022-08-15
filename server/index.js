@@ -167,7 +167,7 @@ io.on("connection", (socket) => {
       user_id: data.userId,
       chat_id: data.room,
       team_name: data.team_name,
-      chat_name: "test chat name"
+      chat_name: "chat name"
     }
 
 

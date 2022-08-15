@@ -41,6 +41,7 @@ router.post("/", (req, res) => {
             console.log(data);
             // res.json({ success: "true" });
         }).catch((err) => {
+            console.log(err);
             res.status(500).send("Error creating post");
         })
 })
