@@ -20,7 +20,12 @@ $npm i
 
 After the dependencies have been installed now set up the server to communicate with your sql server. In the server directory navigate to the knexfile.js. With the file open change the host, user, database name, and password to your appropriate information. 
 
+Next run the migration file to create the tables in the database: 
+
+$ npm run migrate 
+
 After doing this you can now initialize the server using node: 
+
 $node server.js
 
 The server should now be up and running. Please keep in mind the server needs to be running as well in order for the application to function on the client side. 
@@ -38,3 +43,4 @@ Once the dependencies are installed you are next going to start the react applic
 $npm start 
 
 Now the application will appear in your browser of choice and you can use it. Please keep in mind that PickUp was designed to be viewed on a mobile screen size no larger than 760 pixels. It is not a fully responsive application. Screen sizes larger than this may cause issues with the display of content and functionality of the app.  
+
