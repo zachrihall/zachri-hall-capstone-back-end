@@ -8,7 +8,7 @@ Mac: https://dev.mysql.com/doc/refman/8.0/en/macos-installation.html
 
 Windows: https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html
 
-After installing and setting it up then continue with the PickUp installation instructions. 
+After installing and setting it up, now create a new database for the application. 
 
 To get started: first clone the server side repository from this link: 
 
@@ -18,7 +18,7 @@ Then after opening the folder in VSCode change into the server directory. Once i
 
 $npm i 
 
-After the dependencies have been installed now set up the server to communicate with your sql server. In the server directory navigate to the knexfile.js. With the file open change the host, user, and password keys to your appropriate information. 
+After the dependencies have been installed now set up the server to communicate with your sql server. In the server directory navigate to the knexfile.js. With the file open change the host, user, database name, and password to your appropriate information. 
 
 After doing this you can now initialize the server using node: 
 $node server.js
