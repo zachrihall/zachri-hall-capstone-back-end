@@ -1,5 +1,6 @@
 const knex = require("knex")(require("./knexfile.js"));
 const express = require('express');
+require('dotenv').config();
 const app = express();
 const cors = require("cors");
 const http = require("http");
@@ -51,9 +52,6 @@ app.post('/upload', async (req, res) => {
     console.log(uploadPath)
     res.status(200).json({ path: uploadPath });
   });
-
-
-
 });
 
 
@@ -69,6 +67,12 @@ app.post("/signup", (req, res) => {
   console.log('Users Object:', users);
   res.json({ success: "true" });
 });
+
+app.get('api_key', (req, res) => {
+  res.json({
+    key: process.env.API_KEY
+  })
+})
 
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
