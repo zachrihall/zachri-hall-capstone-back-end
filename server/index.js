@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 const http = require("http");
 const { Server } = require('socket.io');
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 const fileUpload = require('express-fileupload');
 
 const usersRoutes = require("./routes/usersRoutes");
