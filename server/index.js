@@ -70,7 +70,7 @@ app.post("/signup", (req, res) => {
   res.json({ success: "true" });
 });
 
-app.get('api_key', (req, res) => {
+app.get('/api_key', (req, res) => {
   res.json({
     key: process.env.API_KEY
   })
